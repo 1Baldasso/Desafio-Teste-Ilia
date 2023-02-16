@@ -1,11 +1,12 @@
 namespace Api_Testes
 {
     [TestClass]
-    public class UnitTest1
+    public class TesteFactory
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FactoryOnRunShouldInitializeDatabase()
         {
+
         }
     }
 }
