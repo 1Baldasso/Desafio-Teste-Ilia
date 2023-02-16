@@ -10,6 +10,7 @@ namespace Desafio_Teste_Ilia.Models
         public int Id { get; set; }
         public DateTime Dia { get; set; }
         public virtual List<Momento> Horarios { get; set; }
-        public TimeSpan TempoTrabalhado { get; set; }
+
+        public TimeSpan TempoTrabalhado;
     }
 }
