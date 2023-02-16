@@ -13,28 +13,19 @@ namespace Desafio_Teste_Ilia.Factory
             db.Database.EnsureCreated();
             if (db.Registros.Count() != 0)
                 return;
-            db.Registros.Add(new Registro
-            {
-                Dia = DateTime.Parse("15/02/2023"),
-                Horarios = new List<Momento>
-                { 
-                    new Momento { DataHora = new DateTime(2023,02,15,09,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,15,12,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,15,13,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,15,18,00,00) },
-                }
-            });
-            db.Registros.Add(new Registro
-            {
-                Dia = DateTime.Parse("16/02/2023"),
-                Horarios = new List<Momento>
-                {
-                    new Momento { DataHora = new DateTime(2023,02,16,09,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,16,12,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,16,13,00,00) },
-                    new Momento { DataHora = new DateTime(2023,02,16,18,00,00) },
-                }
-            });
+
+            Registro registro = new Registro { Dia = DateTime.Parse("15/02/2023") };
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 09, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 12, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 13, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 18, 00, 00) });
+            db.Registros.Add(registro);
+            Registro registro2 = new Registro { Dia = DateTime.Parse("16/02/2023") };
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 09, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 12, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 13, 00, 00) });
+            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 18, 00, 00) });
+            db.Registros.Add(registro2);
             db.Projetos.Add(new Projeto { Nome = "Looney Tunes WOM" });
             db.SaveChanges();
             db.Alocacao.Add(new Alocacao { 
