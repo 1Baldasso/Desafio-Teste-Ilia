@@ -6,11 +6,12 @@ namespace Desafio_Teste_Ilia.Database
     public class APIContext : DbContext
     {
 
-        private string DataSource = "LUCAS_BALDASSO";
+        private string DataSource = "(localdb)\\MSSQLLocalDB";
         private string DatabaseName = "DbAPI";
         private string ConnectionString;
 
         public APIContext() => ConnectionString = $"server=.;data source={DataSource};initial catalog={DatabaseName};integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;TrustServerCertificate=true";
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
