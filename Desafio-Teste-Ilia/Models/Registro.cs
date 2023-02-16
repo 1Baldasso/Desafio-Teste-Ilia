@@ -10,9 +10,18 @@ namespace Desafio_Teste_Ilia.Models
         public int Id { get; set; }
         public DateTime Dia { get; set; }
         public virtual List<Momento> Horarios { get; private set; } = new List<Momento>();
+        public Registro(DateTime dia)
+        {
+            if (dia.DayOfWeek == DayOfWeek.Sunday || dia.DayOfWeek == DayOfWeek.Saturday)
+                throw new Exception("Sábados e Domingos não podem ser registrados como dia de trabalho.");
+            this.Dia = dia;
+        }
 
         public void AdicionarHorarioDeRegistro(Momento momento)
         {
+            if (Horarios.Count() == 4)
+                throw new InvalidOperationException("Só podem ser registrados 4 horários por dia");
+
             Horarios.Add(momento);
             switch(Horarios.Count())
             {

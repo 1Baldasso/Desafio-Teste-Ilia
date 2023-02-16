@@ -13,7 +13,7 @@ namespace Api_Testes
         [TestMethod]
         public void RegistroShouldDefineTimespanForTotalWorkedHours()
         {
-            Registro registro = new Registro { Dia = DateTime.Parse("15/02/2023") };
+            Registro registro = new Registro (DateTime.Parse("15/02/2023"));
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 09, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 12, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 13, 00, 00) });
@@ -23,7 +23,7 @@ namespace Api_Testes
         [TestMethod]
         public void RegistroShouldThrowExceptionIfLunchTimeLessThanOneHour()
         {
-            Registro registro = new Registro { Dia = DateTime.Parse("15/02/2023") };
+            Registro registro = new Registro (DateTime.Parse("15/02/2023"));
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 09, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 12, 00, 00) });
             Assert.ThrowsException<ArgumentException>(() => registro.AdicionarHorarioDeRegistro( new Momento { DataHora = new DateTime(2023, 02, 15, 12, 30, 00) }));
@@ -33,12 +33,18 @@ namespace Api_Testes
         [TestMethod]
         public void RegistroShouldThrowExceptionIfMoreThanFourHorarios()
         {
-            Registro registro = new Registro { Dia = DateTime.Parse("15/02/2023") };
+            Registro registro = new Registro (DateTime.Parse("15/02/2023"));
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 09, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 12, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 13, 00, 00) });
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 18, 00, 00) });
             Assert.ThrowsException<InvalidOperationException>(() => registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 22, 00, 00) }));
+        }
+
+        [TestMethod]
+        public void RegistroShouldThrowExceptionIfDayIsWeekend()
+        {
+            Assert.ThrowsException<Exception>(() => new Registro((DateTime.Parse("19/02/2023"))));
         }
     }
 }
