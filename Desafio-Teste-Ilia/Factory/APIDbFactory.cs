@@ -21,26 +21,15 @@ namespace Desafio_Teste_Ilia.Factory
             registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 15, 18, 00, 00) });
             db.Registros.Add(registro);
             Registro registro2 = new Registro(DateTime.Parse("16/02/2023"));
-            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 09, 00, 00) });
-            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 12, 00, 00) });
-            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 13, 00, 00) });
-            registro.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 18, 00, 00) });
-            db.Registros.Add(registro2);
-            db.Projetos.Add(new Projeto { Nome = "Looney Tunes WOM" });
+            registro2.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 09, 00, 00) });
+            registro2.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 12, 00, 00) });
+            registro2.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 13, 00, 00) });
+            registro2.AdicionarHorarioDeRegistro(new Momento { DataHora = new DateTime(2023, 02, 16, 18, 00, 00) });
             db.SaveChanges();
             db.Alocacao.Add(new Alocacao { 
-                Projeto = db.Projetos.First(),
+                NomeProjeto = "Looney Tunes World of Mayhem",
                 Dia = DateTime.Parse("15/02/2023"),
-                Tempo = db.Registros.First().Horarios.OrderBy(x=>x.DataHora).Last().DataHora.TimeOfDay - db.Registros.First().Horarios.First().DataHora.TimeOfDay - new TimeSpan(1,0,0),
-            });
-            db.SaveChanges();
-            db.Relatorios.Add(new Relatorio
-            {
-                Alocacoes = db.Alocacao.Where(x => x.Dia.Month == 2).ToList(),
-                Mes = $"{2}/{2023}",
-                HorasTrabalhadas = db.Registros
-                    .Where(x => x.Dia.Month == 2).Select(x=>x.TempoTrabalhado).First(),
-
+                Tempo = TimeSpan.FromHours(8),
             });
             db.SaveChanges();
         }

@@ -1,5 +1,6 @@
 ﻿using Desafio_Teste_Ilia.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Desafio_Teste_Ilia.Database
 {
@@ -18,9 +19,24 @@ namespace Desafio_Teste_Ilia.Database
             options.UseSqlServer(ConnectionString, x => x.EnableRetryOnFailure());
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Relatorio>()
+                .Property(x => x.HorasDevidas)
+                .HasConversion(new TimeSpanToStringConverter());
+            modelBuilder.Entity<Relatorio>()
+                .Property(x => x.HorasExcedentes)
+                .HasConversion(new TimeSpanToStringConverter());
+            modelBuilder.Entity<Relatorio>()
+                .Property(x => x.HorasTrabalhadas)
+                .HasConversion(new TimeSpanToStringConverter());
+            modelBuilder.Entity<Alocacao>()
+                .Property(x=>x.Tempo)
+                .HasConversion(new TimeSpanToStringConverter());
+        }
+        
         public virtual DbSet<Registro> Registros { get;set; }
         public virtual DbSet<Alocacao> Alocacao { get; set; }
-        public virtual DbSet<Projeto> Projetos { get; set; }
         public virtual DbSet<Relatorio> Relatorios { get; set; }
     }
 }

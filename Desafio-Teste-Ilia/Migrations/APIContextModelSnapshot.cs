@@ -33,18 +33,18 @@ namespace Desafio_Teste_Ilia.Migrations
                     b.Property<DateTime>("Dia")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("int");
+                    b.Property<string>("NomeProjeto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RelatorioId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Tempo")
-                        .HasColumnType("time");
+                    b.Property<string>("Tempo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(48)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjetoId");
 
                     b.HasIndex("RelatorioId");
 
@@ -70,23 +70,6 @@ namespace Desafio_Teste_Ilia.Migrations
                     b.HasIndex("RegistroId");
 
                     b.ToTable("Momento");
-                });
-
-            modelBuilder.Entity("Desafio_Teste_Ilia.Models.Projeto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Projetos");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Registro", b =>
@@ -118,14 +101,17 @@ namespace Desafio_Teste_Ilia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<TimeSpan>("HorasDevidas")
-                        .HasColumnType("time");
+                    b.Property<string>("HorasDevidas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(48)");
 
-                    b.Property<TimeSpan>("HorasExcedentes")
-                        .HasColumnType("time");
+                    b.Property<string>("HorasExcedentes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(48)");
 
-                    b.Property<TimeSpan>("HorasTrabalhadas")
-                        .HasColumnType("time");
+                    b.Property<string>("HorasTrabalhadas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(48)");
 
                     b.Property<string>("Mes")
                         .IsRequired()
@@ -138,17 +124,9 @@ namespace Desafio_Teste_Ilia.Migrations
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Alocacao", b =>
                 {
-                    b.HasOne("Desafio_Teste_Ilia.Models.Projeto", "Projeto")
-                        .WithMany()
-                        .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Desafio_Teste_Ilia.Models.Relatorio", null)
                         .WithMany("Alocacoes")
                         .HasForeignKey("RelatorioId");
-
-                    b.Navigation("Projeto");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Momento", b =>

@@ -9,7 +9,7 @@ namespace Desafio_Teste_Ilia.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Dia { get; set; }
-        public virtual List<Momento> Horarios { get; private set; } = new List<Momento>();
+        public virtual List<Momento> Horarios { get; set; } = new List<Momento>();
         public Registro(DateTime dia)
         {
             if (dia.DayOfWeek == DayOfWeek.Sunday || dia.DayOfWeek == DayOfWeek.Saturday)
@@ -20,7 +20,7 @@ namespace Desafio_Teste_Ilia.Models
         public void AdicionarHorarioDeRegistro(Momento momento)
         {
             if (Horarios.Count() == 4)
-                throw new InvalidOperationException("Só podem ser registrados 4 horários por dia");
+                throw new TaskCanceledException("Só podem ser registrados 4 horários por dia");
 
             Horarios.Add(momento);
             switch(Horarios.Count())

@@ -6,24 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Desafio_Teste_Ilia.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Reinitialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Projetos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projetos", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Relatorios",
                 columns: table => new
@@ -31,9 +18,9 @@ namespace Desafio_Teste_Ilia.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HorasTrabalhadas = table.Column<TimeSpan>(type: "time", nullable: false),
-                    HorasExcedentes = table.Column<TimeSpan>(type: "time", nullable: false),
-                    HorasDevidas = table.Column<TimeSpan>(type: "time", nullable: false)
+                    HorasTrabalhadas = table.Column<string>(type: "nvarchar(48)", nullable: false),
+                    HorasExcedentes = table.Column<string>(type: "nvarchar(48)", nullable: false),
+                    HorasDevidas = table.Column<string>(type: "nvarchar(48)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,19 +34,13 @@ namespace Desafio_Teste_Ilia.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Dia = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Tempo = table.Column<TimeSpan>(type: "time", nullable: false),
-                    ProjetoId = table.Column<int>(type: "int", nullable: false),
+                    Tempo = table.Column<string>(type: "nvarchar(48)", nullable: false),
+                    NomeProjeto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RelatorioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Alocacao", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Alocacao_Projetos_ProjetoId",
-                        column: x => x.ProjetoId,
-                        principalTable: "Projetos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Alocacao_Relatorios_RelatorioId",
                         column: x => x.RelatorioId,
@@ -106,11 +87,6 @@ namespace Desafio_Teste_Ilia.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Alocacao_ProjetoId",
-                table: "Alocacao",
-                column: "ProjetoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Alocacao_RelatorioId",
                 table: "Alocacao",
                 column: "RelatorioId");
@@ -134,9 +110,6 @@ namespace Desafio_Teste_Ilia.Migrations
 
             migrationBuilder.DropTable(
                 name: "Momento");
-
-            migrationBuilder.DropTable(
-                name: "Projetos");
 
             migrationBuilder.DropTable(
                 name: "Registros");

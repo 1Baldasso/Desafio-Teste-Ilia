@@ -10,6 +10,6 @@ namespace Desafio_Teste_Ilia.Models
 
         public TimeSpan Tempo { get; set; }
 
-        public virtual Projeto Projeto { get; set; }
+        public string NomeProjeto { get; set; }
     }
 }

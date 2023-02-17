@@ -20,7 +20,7 @@ namespace Api_Testes
         public void APIDbFactoryOnRunShouldCreateElements()
         {
             APIDbFactory.Run();
-            bool DataCreated = db.Registros.Count() > 0 && db.Alocacao.Count() > 0 && db.Relatorios.Count() > 0 && db.Projetos.Count() > 0;
+            bool DataCreated = db.Registros.Count() > 0 && db.Alocacao.Count() > 0 && db.Relatorios.Count() > 0;
             Assert.IsTrue(DataCreated);
         }
     }
