@@ -9,5 +9,14 @@ namespace Desafio_Teste_Ilia.Helpers
             var array = time.ToArray();
             return (array[1] - array[0]) + (array[3] - array[2]);
         }
+        public static TimeSpan Sum(this ICollection<TimeSpan> time)
+        {
+            TimeSpan finalTime = TimeSpan.Zero;
+            foreach(var item in time)
+            {
+                finalTime += item;
+            }
+            return finalTime;
+        }
     }
 }

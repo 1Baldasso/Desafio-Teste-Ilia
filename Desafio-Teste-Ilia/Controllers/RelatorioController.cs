@@ -16,13 +16,7 @@ namespace Desafio_Teste_Ilia.Controllers
             var relatorioFinal = new Relatorio();
             try
             {
-                relatorioFinal = db.Relatorios.FirstOrDefault(x => x.Mes == anoMes);
-                if (relatorioFinal is null)
-                {
-                    relatorioFinal = new Relatorio(anoMes);
-                    db.Relatorios.Add(relatorioFinal);
-                    db.SaveChanges();
-                }
+                relatorioFinal = new Relatorio(anoMes);
             } 
             catch (Exception ex)
             {

@@ -19,7 +19,10 @@ namespace Desafio_Teste_Ilia.Controllers
             try
             {
                 horarioTotalDoDia = (TimeSpan)db.Registros.Include(x => x.Horarios)
-                    .FirstOrDefault(x => x.Dia.Date == alocacao.Dia.Date)?.Horarios.Sum();
+                    .FirstOrDefault(x => x.Dia.Date == alocacao.Dia.Date)?
+                    .Horarios.Sum() - db.Alocacao
+                    .Where(x=>x.Dia.Date == alocacao.Dia.Date).Select(x=>x.Tempo)
+                    .ToList().Sum();
             }
             catch(IndexOutOfRangeException ex)
             {
@@ -27,7 +30,7 @@ namespace Desafio_Teste_Ilia.Controllers
             }
             var alocacaoFinal = alocacao.Transform();
             if (alocacaoFinal.Tempo > horarioTotalDoDia)
-                return StatusCode(400, new Mensagem { mensagem = "Não pode alocar tempo maior que o tempo trabalhado no dia." });
+                return StatusCode(400, new Mensagem { mensagem = "Não é possível alocar tempo, maior que o tempo trabalhado no dia." });
             db.Alocacao.Add(alocacaoFinal);
             db.SaveChanges();
             return Ok(alocacao);

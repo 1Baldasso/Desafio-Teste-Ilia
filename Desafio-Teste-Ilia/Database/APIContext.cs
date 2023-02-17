@@ -21,15 +21,6 @@ namespace Desafio_Teste_Ilia.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Relatorio>()
-                .Property(x => x.HorasDevidas)
-                .HasConversion(new TimeSpanToStringConverter());
-            modelBuilder.Entity<Relatorio>()
-                .Property(x => x.HorasExcedentes)
-                .HasConversion(new TimeSpanToStringConverter());
-            modelBuilder.Entity<Relatorio>()
-                .Property(x => x.HorasTrabalhadas)
-                .HasConversion(new TimeSpanToStringConverter());
             modelBuilder.Entity<Alocacao>()
                 .Property(x=>x.Tempo)
                 .HasConversion(new TimeSpanToStringConverter());
@@ -37,7 +28,6 @@ namespace Desafio_Teste_Ilia.Database
         
         public virtual DbSet<Registro> Registros { get;set; }
         public virtual DbSet<Alocacao> Alocacao { get; set; }
-        public virtual DbSet<Relatorio> Relatorios { get; set; }
         public virtual DbSet<Momento> Momentos { get; set; }
     }
 }

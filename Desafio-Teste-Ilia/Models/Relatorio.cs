@@ -28,7 +28,7 @@ namespace Desafio_Teste_Ilia.Models
                 .ToList();
             CalcularTempoDeTrabalho();
             CalcularHorasExcedentes(TimeSpan.FromHours(160));
-            CalcularHorasExcedentes(TimeSpan.FromHours(160));
+            CalcularHorasDevidas(TimeSpan.FromHours(160));
         }
         private void CalcularTempoDeTrabalho()
         {
