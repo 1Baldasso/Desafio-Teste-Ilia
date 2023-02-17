@@ -20,7 +20,7 @@ namespace Desafio_Teste_Ilia.Models
         public void AdicionarHorarioDeRegistro(Momento momento)
         {
             if (Horarios.Count() == 4)
-                throw new TaskCanceledException("Só podem ser registrados 4 horários por dia");
+                throw new InvalidOperationException("Só podem ser registrados 4 horários por dia");
 
             Horarios.Add(momento);
             switch(Horarios.Count())

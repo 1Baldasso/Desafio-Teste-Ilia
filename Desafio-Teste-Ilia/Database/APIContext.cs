@@ -38,5 +38,6 @@ namespace Desafio_Teste_Ilia.Database
         public virtual DbSet<Registro> Registros { get;set; }
         public virtual DbSet<Alocacao> Alocacao { get; set; }
         public virtual DbSet<Relatorio> Relatorios { get; set; }
+        public virtual DbSet<Momento> Momentos { get; set; }
     }
 }

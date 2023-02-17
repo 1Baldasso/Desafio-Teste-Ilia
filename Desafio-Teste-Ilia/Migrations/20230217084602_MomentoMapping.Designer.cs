@@ -4,6 +4,7 @@ using Desafio_Teste_Ilia.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Desafio_Teste_Ilia.Migrations
 {
     [DbContext(typeof(APIContext))]
-    partial class APIContextModelSnapshot : ModelSnapshot
+    [Migration("20230217084602_MomentoMapping")]
+    partial class MomentoMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace Desafio_Teste_Ilia.Migrations
 
                     b.HasIndex("RelatorioId");
 
-                    b.ToTable("Alocacao", (string)null);
+                    b.ToTable("Alocacao");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Momento", b =>
@@ -69,7 +72,7 @@ namespace Desafio_Teste_Ilia.Migrations
 
                     b.HasIndex("RegistroId");
 
-                    b.ToTable("Momentos", (string)null);
+                    b.ToTable("Momentos");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Registro", b =>
@@ -90,7 +93,7 @@ namespace Desafio_Teste_Ilia.Migrations
 
                     b.HasIndex("RelatorioId");
 
-                    b.ToTable("Registros", (string)null);
+                    b.ToTable("Registros");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Relatorio", b =>
@@ -119,7 +122,7 @@ namespace Desafio_Teste_Ilia.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Relatorios", (string)null);
+                    b.ToTable("Relatorios");
                 });
 
             modelBuilder.Entity("Desafio_Teste_Ilia.Models.Alocacao", b =>

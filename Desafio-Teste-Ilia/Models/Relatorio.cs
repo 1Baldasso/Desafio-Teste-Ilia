@@ -24,7 +24,7 @@ namespace Desafio_Teste_Ilia.Models
             var ano = int.Parse(anoMes.Substring(0, 4));
             this.Registros = db.Registros.AsNoTracking().Include(x => x.Horarios).Where(x => x.Dia.Month == mes && x.Dia.Year == ano)
                 .ToList();
-            this.Alocacoes = db.Alocacao.Where(x => x.Dia.Month == mes && x.Dia.Year == ano)
+            this.Alocacoes = db.Alocacao.AsNoTracking().Where(x => x.Dia.Month == mes && x.Dia.Year == ano)
                 .ToList();
             CalcularTempoDeTrabalho();
             CalcularHorasExcedentes(TimeSpan.FromHours(160));
@@ -32,6 +32,7 @@ namespace Desafio_Teste_Ilia.Models
         }
         private void CalcularTempoDeTrabalho()
         {
+            if(Registros.Count == 0) { throw new ArgumentException("Não existem registros para essa data"); }
             foreach (var registro in Registros)
             {
                 var horarioPreAlmoco = (registro.Horarios[1].DataHora - registro.Horarios[0].DataHora);
